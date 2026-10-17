@@ -1,0 +1,14 @@
+# 统一换行与文本处理，避免 Windows/macOS/Linux 混用产生噪音 diff
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+
+# PowerShell 脚本保留 CRLF（Windows 习惯）
+*.ps1 text eol=crlf
+
+# CI 与安装脚本必须是 LF
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
