@@ -1,0 +1,5 @@
+# Bundle patch layer: host half is index.js (webServer route + child_process bridge);
+# dsh.client loads client.js (right-sidebar panel + main view).
+- insert:
+    - id: dsh-ths-ai
+      name: dsh-ths-ai

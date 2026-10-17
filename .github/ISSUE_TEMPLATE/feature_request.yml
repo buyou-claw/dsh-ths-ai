@@ -1,0 +1,44 @@
+name: Feature request
+description: 提出新能力或改进建议
+title: "[feat] "
+labels: ["needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提出前请确认：这个需求**不需要**绕过登录/验证码/付费墙，也不涉及批量采集或反检测。
+        参考 [合规边界](https://github.com/buyou-claw/dsh-ths-ai/blob/main/docs/LEGAL.md)。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你想解决的问题
+      description: 描述场景与痛点，而不是直接给方案
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 你设想的做法
+      placeholder: 例如「面板支持把结果一键复制为 Markdown」
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响范围
+      options:
+        - 工具 / 模型侧（ths_query、ths_status、/ths）
+        - 右侧面板（client.js）
+        - 浏览器 / 登录态（login/status/query）
+        - 页面解析（表格抽取）
+        - 安装 / 配置 / 文档
+        - 其他
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我理解本项目不做反检测、不做批量采集、不绕过任何访问限制
+          required: true

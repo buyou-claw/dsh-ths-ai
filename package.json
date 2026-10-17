@@ -1,0 +1,86 @@
+{
+  "name": "dsh-ths-ai",
+  "version": "0.1.0",
+  "description": "DSH 原生「同花顺 AI」插件：用本机已登录的浏览器 profile 查询同花顺问财（iwencai），提供右侧面板、/ths skill 与 ths_query / ths_status 工具。非官方项目。",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "iwencai",
+    "tonghuashun",
+    "问财",
+    "同花顺",
+    "a-share",
+    "stock-screener",
+    "playwright"
+  ],
+  "homepage": "https://github.com/buyou-claw/dsh-ths-ai#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buyou-claw/dsh-ths-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/buyou-claw/dsh-ths-ai/issues"
+  },
+  "author": "buyou-claw",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "config.mjs",
+    "login.mjs",
+    "query.mjs",
+    "status.mjs",
+    "cordis.patch.yml",
+    "skills/",
+    "docs/",
+    "install/",
+    "rollback.ps1",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "node --check index.js && node --check config.mjs && node --check login.mjs && node --check query.mjs && node --check status.mjs && node --check client.js",
+    "verify:status": "node status.mjs",
+    "verify:query": "node query.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "^1.64.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.0-rc.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh": {
+      "optional": true
+    }
+  },
+  "dsh": {
+    "id": "dsh-ths-ai",
+    "name": "同花顺 AI",
+    "version": "0.1.0",
+    "repo": "buyou-claw/dsh-ths-ai",
+    "platform": "win32",
+    "permissions": "子进程(node + 浏览器)、本机浏览器 profile 读写、webServer 路由 /ths-ai/*、agent 工具 2 个、skill 1 个、右侧面板 1 个",
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  }
+}

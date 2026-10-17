@@ -1,0 +1,24 @@
+# 依赖与运行期产物
+node_modules/
+
+# 本机浏览器持久化 profile：含登录 Cookie，绝对不要提交
+profile/
+profile-*/
+
+# 诊断日志与临时文件
+*.log
+tool-register.log
+*.bak
+*.tmp
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# 本地配置与密钥
+.env
+.env.*
+!.env.example

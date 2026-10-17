@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    name: syntax + packaging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --omit=dev --ignore-scripts
+
+      - name: Syntax check (index/client/config/scripts)
+        run: npm run check
+
+      - name: Guard — profile or logs must not be committed
+        run: |
+          set -e
+          tracked="$(git ls-files)"
+          if echo "$tracked" | grep -Eq '(^|/)profile/'; then
+            echo "::error::profile/ 被提交进仓库了（含 Cookie），必须移除"
+            exit 1
+          fi
+          if echo "$tracked" | grep -Eq '(^|/)(tool-register\.log|.+\.log)$'; then
+            echo "::error::日志文件被提交进仓库了"
+            exit 1
+          fi
+          echo "ok: no profile/ or log files tracked"
+
+      - name: Guard — no anti-detection / proxy hints
+        run: |
+          set -e
+          if grep -RIn --exclude-dir=node_modules --exclude-dir=.git \
+               --include='*.js' --include='*.mjs' \
+               -E 'AutomationControlled|--proxy-server|stealth' .; then
+            echo "::error::检测到反检测/代理相关代码，违反 docs/LEGAL.md 的合规边界"
+            exit 1
+          fi
+          echo "ok: no anti-detection code"
+
+      - name: Packaging dry-run
+        run: npm pack --dry-run
+
+  json:
+    name: json valid
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          set -e
+          for f in package.json package-lock.json; do
+            [ -f "$f" ] && node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" && echo "ok: $f"
+          done

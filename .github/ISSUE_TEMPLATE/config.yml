@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安装与升级指南
+    url: https://github.com/buyou-claw/dsh-ths-ai/blob/main/docs/INSTALL.md
+    about: 装不上、工具没出现、profile 被占用，先看这里
+  - name: 故障排查
+    url: https://github.com/buyou-claw/dsh-ths-ai/blob/main/docs/TROUBLESHOOTING.md
+    about: 按症状排查登录态、查询失败、解析异常
+  - name: 合规与免责声明
+    url: https://github.com/buyou-claw/dsh-ths-ai/blob/main/docs/LEGAL.md
+    about: 使用前请阅读：本项目的边界、你的义务与风险
+  - name: 安全问题（私密）
+    url: https://github.com/buyou-claw/dsh-ths-ai/security/advisories/new
+    about: 涉及 Cookie 泄露、命令注入等请走私密渠道，不要开公开 issue

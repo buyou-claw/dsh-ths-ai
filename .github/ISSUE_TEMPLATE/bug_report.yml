@@ -1,0 +1,62 @@
+name: Bug report
+description: 报告一个可复现的问题（工具缺失、查询失败、解析异常等）
+title: "[bug] "
+labels: ["needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请先看 [排查文档](https://github.com/buyou-claw/dsh-ths-ai/blob/main/docs/TROUBLESHOOTING.md)。
+        **不要**在截图或日志里暴露 Cookie、手机号、验证码。
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DSH 版本
+      placeholder: 例如 0.2.0-rc.2
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: 操作系统
+      placeholder: 例如 Windows 11 23H2 / macOS 15 / Ubuntu 24.04
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开面板
+        2. 输入「…」
+        3. 看到…
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: 诊断日志片段（已脱敏）
+      description: 来自 ~/.dsh/logs/dsh-ths-ai.log 的最后 30 行左右
+      render: text
+    validations:
+      required: false
+  - type: dropdown
+    id: panel-status
+    attributes:
+      label: 面板显示的登录状态
+      options:
+        - 已登录
+        - 未登录
+        - 未知
+        - 面板打不开
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我已阅读排查文档，并确认日志中没有 Cookie / 账号信息
+          required: true
+        - label: 我理解本项目是非官方插件，自动化访问存在账号风险
+          required: true
