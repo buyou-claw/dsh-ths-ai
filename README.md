@@ -184,12 +184,12 @@ dsh-ths-ai/
 npm install --omit=dev
 npm run check            # 6 个文件语法检查（CI 跑这个）
 npm run verify:status    # 真实检查登录态（会拉起浏览器）
-npm run verify:query     # 真实查询一次（THS_QUERY 可选）
+THS_QUERY="今日涨幅前10的股票" npm run verify:query   # 真实查询一次
 ```
 
 CI 只做语法检查，不做联网测试（不在 CI 里使用任何账号）。改动问财选择器时请本地跑 `verify:query` 并附日志。
 
-贡献流程见 [CONTRIBUTING.md](CONTRIBUTING.md)，Issue/PR 约定见 [AGENTS.md](AGENTS.md)。
+贡献流程见 [CONTRIBUTING.md](CONTRIBUTING.md)，Issue/PR 约定见 [AGENTS.md](AGENTS.md)，版本发布与市场提交见 [docs/PUBLISHING.md](docs/PUBLISHING.md)。
 
 ## Roadmap
 
