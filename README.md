@@ -197,7 +197,7 @@ CI 只做语法检查，不做联网测试（不在 CI 里使用任何账号）�
 - [ ] 用 `waitForSelector` 替换固定 12 s 等待，缩短查询耗时
 - [ ] 表格结构适配层：问财改版时集中改一处
 - [ ] 结构化输出（`ths_query` 返回 JSON，便于二次加工）
-- [ ] 提交到 DSH 插件市场（dshmarket）
+- [x] 上架 DSH 插件市场（GitHub topic `dsh-plugin`，见 [docs/PUBLISHING.md](docs/PUBLISHING.md)）
 
 ## 许可
 

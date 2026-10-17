@@ -1,6 +1,6 @@
 # 发布与分发说明
 
-本仓库是 **DSH 第三方插件**，目前有两类分发通道：GitHub 直装（已就绪）与 DSH 插件市场（待提交）。本文说明两者的要求与步骤。
+本仓库是 **DSH 第三方插件**，目前有两类分发通道：GitHub 直装（已就绪）与 DSH 插件市场（已通过 `dsh-plugin` topic 收录）。本文说明两者的要求与步骤。
 
 ## 1. 当前发布物
 
@@ -38,29 +38,32 @@
 - [ ] `platform` 与实际支持范围一致（当前 `win32`，如实标注而不是宣称跨平台）
 - [ ] `files` 白名单不含 `profile/`（否则会打包登录 Cookie —— 这是**安全事故**，CI 已守卫）
 
-## 3. 提交到 DSH 插件市场（dshmarket）
+## 3. 市场收录：GitHub topic `dsh-plugin`
 
-市场收录方式随 DSH 版本可能变化，当前做法：
+DSH 插件市场的收录方式就是**给仓库打上 `dsh-plugin` topic**（DSH 官方仓库 `deepseek-ai/deepseek-harness` 与生态里的头部插件都用这个标签），没有需要提 PR 的中心化清单。
 
-1. 在本地 DSH 打开「插件」/ dshmarket，确认市场是否提供「提交插件 / Submit plugin」入口；
-2. 一般需要提供：仓库 URL、插件 id、名称、简介、平台、所需权限、截图（`docs/assets/panel.png` 可直接用）、许可证；
-3. 若市场采用中心化清单（registry repo），按其 CONTRIBUTING 提 PR，清单条目建议：
+本仓库当前 topics（已生效）：
 
-```yaml
-- id: dsh-ths-ai
-  name: 同花顺 AI
-  repo: https://github.com/buyou-claw/dsh-ths-ai
-  version: 0.1.0
-  license: MIT
-  platform: [win32]
-  permissions: [subprocess, browser-profile, web-route, agent-tools, skill, client-panel]
-  description: >
-    用本机已登录浏览器 profile 查询同花顺问财，提供右侧面板、/ths skill 与 ths_query/ths_status 工具。
-    非官方，不使用 API/MCP，不采集数据。
-  screenshots: [docs/assets/panel.png]
+```
+dsh-plugin · dsh · deepseek-harness · iwencai · tonghuashun · a-share · playwright · stock-screener
 ```
 
-> **注意**：市场审核通常关心「是否会批量抓取站点 / 是否绕过登录」。本项目的回答是明确的：单用户、手动触发、默认 3 秒节流、无隐身参数、无代理池。提交材料里要写清楚，见 [LEGAL.md](LEGAL.md)。
+验证方式（应能搜到自己）：
+
+```bash
+gh repo view --json repositoryTopics
+# 或直接在 GitHub 搜索
+#   topic:dsh-plugin user:buyou-claw
+```
+
+维护要点：
+
+- **`dsh-plugin` 必须一直在**，它是市场识别插件的唯一约定；其余是检索用关键词，可随时增删；
+- `dsh` / `deepseek-harness` 用来进生态聚合列表；
+- 领域词（`iwencai`、`tonghuashun`、`a-share`、`stock-screener`）决定被搜到的场景；
+- topic 不能带中文（GitHub 限制），所以中文关键词写进 `description` 与 README。
+
+> 说明：市场只负责「发现」，安装仍走本仓库的 `install/install.ps1` 或手工步骤。因此发布新版本时**不需要**重新打标，只要 tag + release 即可。
 
 ## 4. 发布新版本 checklist
 
